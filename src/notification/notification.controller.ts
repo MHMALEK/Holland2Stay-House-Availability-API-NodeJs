@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpException, Post } from '@nestjs/common';
 import { CreateNotificationDto } from './notification.dto';
 import { NotificationService } from './notification.service';
 
@@ -6,7 +6,14 @@ import { NotificationService } from './notification.service';
 export class NotificationController {
   constructor(private notificationService: NotificationService) {}
   @Post('/new')
-  CreateNewNotification(@Body() notificationPayload: CreateNotificationDto) {
-    this.notificationService.createNewnotification(notificationPayload);
+  async CreateNewNotification(
+    @Body() notificationPayload: CreateNotificationDto,
+  ) {
+    try {
+      await this.notificationService.createNewnotification(notificationPayload);
+      return 'Notification created';
+    } catch (e) {
+      throw new HttpException('Something went wrong', 500);
+    }
   }
 }

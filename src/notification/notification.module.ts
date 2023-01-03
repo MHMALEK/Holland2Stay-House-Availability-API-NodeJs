@@ -14,5 +14,6 @@ import { UserModule } from 'src/user/user.module';
     ]),
     UserModule,
   ],
+  exports: [NotificationService],
 })
 export class NotificationModule {}

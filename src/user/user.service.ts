@@ -24,7 +24,6 @@ export class UserService {
     const user = await this.userModel.findOne({
       $or: [{ email }, { telegramId }],
     });
-    console.log('asdsadasdas', user, email, telegramId);
     return user;
   }
 

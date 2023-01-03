@@ -39,7 +39,6 @@ export class NotificationService {
 
   async findUserWhoCreateNotification({ email, telegramId }) {
     const user = await this.userService.findUser({ email, telegramId });
-    console.log('user', user);
     if (!user) {
       throw new HttpException('User Not found', 404);
     }
@@ -64,6 +63,14 @@ export class NotificationService {
 
   async getnotificationsList() {
     const notifications = await this.notificationModel.find();
-    console.log(notifications);
+  }
+  async findNotificationForSpeceficHouse(houseId: string) {
+    const notifications = await this.notificationModel.find({
+      houseId,
+    });
+    if (notifications.length > 0) {
+      return notifications;
+    }
+    return null;
   }
 }

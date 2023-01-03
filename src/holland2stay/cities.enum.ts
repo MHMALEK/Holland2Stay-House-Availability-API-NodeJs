@@ -1,5 +1,5 @@
 export enum citiesENum {
-  amsterdam = '24',
+  Amsterdam = '24',
   Arnhem = '320',
   'Capelle aan den IJssel' = '619',
   'Delft' = '26',

@@ -22,15 +22,12 @@ export class CrawlerService {
   }
 
   async goToPage(page: string) {
-    console.log('hereee', page, this.browser, this.page);
     if (!this.browser) {
       await this.createBrowser();
     }
     if (!this.page) {
       await this.openANewTab();
     }
-
-    console.log(this.page);
 
     await this.page.goto(page);
     return this.page;

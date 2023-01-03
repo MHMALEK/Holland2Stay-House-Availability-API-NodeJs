@@ -52,8 +52,8 @@ export class Holland2stayService {
         citiesENum[citiesKeyArray[index]],
       );
       results.push({
-        label: citiesValuesArray[index],
-        cityId: citiesKeyArray[index],
+        label: citiesKeyArray[index],
+        houseId: citiesValuesArray[index],
         ...res,
       });
     }
