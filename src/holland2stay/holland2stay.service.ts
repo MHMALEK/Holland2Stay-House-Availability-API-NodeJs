@@ -57,7 +57,6 @@ export class Holland2stayService {
         ...res,
       });
     }
-    console.log(results);
     return results;
   }
 }
