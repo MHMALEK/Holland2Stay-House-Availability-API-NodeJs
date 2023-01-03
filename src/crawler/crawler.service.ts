@@ -7,7 +7,7 @@ export class CrawlerService {
   page: Page;
   async createBrowser() {
     this.browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: [
         '--start-maximized', // you can also use '--start-fullscreen'
       ],

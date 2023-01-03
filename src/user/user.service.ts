@@ -56,6 +56,5 @@ export class UserService {
   }
   async getUsersList() {
     const users = await this.userModel.find();
-    console.log(users);
   }
 }
