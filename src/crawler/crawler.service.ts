@@ -8,10 +8,7 @@ export class CrawlerService {
   async createBrowser() {
     this.browser = await puppeteer.launch({
       headless: true,
-      args: [
-        '--start-maximized', // you can also use '--start-fullscreen'
-      ],
-      defaultViewport: null,
+      args: ['--no-sandbox'],
     });
   }
   async openANewTab() {
