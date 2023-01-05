@@ -98,7 +98,8 @@ const initBotMenus = async (bot: Bot) => {
           parse_mode: 'Markdown',
         });
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         ctx.reply('Error, please /start again');
       });
   };
@@ -128,16 +129,39 @@ const createIndAppointmentMenus = async () => {
     selectServiceMenu
       .submenu(
         {
-          text: 'See all Residences',
+          text: 'See residences',
           payload: 'see-all-residences',
         },
         //  after select any item we will show the desk menu (result)
         selectCityMenuName,
         (ctx) => {
           // edit select service text and convert for desk menu `Please select an IND desk`
-          ctx.editMessageText('Please select a City:');
+          ctx.editMessageText('Please select a residence:');
         },
       )
+      .row()
+      .submenu(
+        {
+          text: 'Notify me about residence availability',
+          payload: 'see-all-residences',
+        },
+        //  after select any item we will show the desk menu (result)
+        selectCityMenuName,
+        (ctx) => {
+          // edit select service text and convert for desk menu `Please select an IND desk`
+          ctx.editMessageText('Please select a residence:');
+        },
+      )
+      .row()
+      .url('About Holland2Stay', 'https://www.facebook.com/Holland2Stay/')
+      .row()
+      .url('Contact Holland2Stay', 'https://holland2stay.com/contact/')
+      .row()
+      .text('About Bot', (ctx) => {
+        ctx.reply(
+          'This bot is an open source project to help people to find a new house in Holland2Stay Netherlands! You can create a notification for each residence and this bot will send you a notification about availability of that house everyday.',
+        );
+      })
       .row();
   };
 
@@ -156,14 +180,15 @@ const createIndAppointmentMenus = async () => {
           const resJson = await responseObj.json();
 
           let text = '';
-
-          if (resJson.noHomeAvailable) {
+          console.log(resJson);
+          if (resJson.noHomeAvailable || !resJson.totalHomeAvailable) {
             text = `At the moment there are no available residences at ${city}`;
+          } else {
+            text = `s<b>${resJson.totalHomeAvailable}</b> residence is available at ${city} right now! Do you want to get a notification for this Residence?`;
           }
-          text = `<b>${resJson.totalHomeAvailable}</b> residence is available at ${city}`;
 
           const responseToUser = new InlineKeyboard()
-            .text('Create a reminder', 'click-reminder')
+            .text('Notify me', 'click-reminder')
             .row();
 
           await ctx.reply(text, {

@@ -24,7 +24,6 @@ export class Holland2stayService {
       ).jsonValue();
 
       if (getNotificationElementText.includes('no available')) {
-        totalHomeAvailable = null;
         noHomeAvailable = true;
       } else {
         const getTotalAvailableHouses = await page.$(

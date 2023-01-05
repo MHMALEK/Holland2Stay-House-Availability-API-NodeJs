@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TelegramModule } from 'src/telegram/telegram.module';
 import { TelegramService } from 'src/telegram/telegram.service';
+import { UserService } from 'src/user/user.service';
 import { MessengerController } from './messenger.controller';
 import { MessengerService } from './messenger.service';
 
@@ -8,5 +9,6 @@ import { MessengerService } from './messenger.service';
   controllers: [MessengerController],
   providers: [MessengerService, TelegramService],
   imports: [TelegramModule],
+  exports: [MessengerService],
 })
 export class MessengerModule {}

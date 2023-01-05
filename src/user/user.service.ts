@@ -20,10 +20,15 @@ export class UserService {
 
     return createdUser.save();
   }
-  async findUser({ email, telegramId }) {
+  async findUserByTelegramOrEmail({ email, telegramId }) {
     const user = await this.userModel.findOne({
       $or: [{ email }, { telegramId }],
     });
+    return user;
+  }
+
+  async findUserById(userId: string) {
+    const user = await this.userModel.findOne({ id: userId });
     return user;
   }
 
@@ -48,7 +53,7 @@ export class UserService {
   }
 
   async checkIfUserAlreadyExist({ telegramId, email }) {
-    const user = await this.findUser({ telegramId, email });
+    const user = await this.findUserByTelegramOrEmail({ telegramId, email });
     if (user) {
       return true;
     }

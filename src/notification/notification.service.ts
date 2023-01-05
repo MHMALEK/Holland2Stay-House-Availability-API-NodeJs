@@ -38,7 +38,10 @@ export class NotificationService {
   }
 
   async findUserWhoCreateNotification({ email, telegramId }) {
-    const user = await this.userService.findUser({ email, telegramId });
+    const user = await this.userService.findUserByTelegramOrEmail({
+      email,
+      telegramId,
+    });
     if (!user) {
       throw new HttpException('User Not found', 404);
     }
