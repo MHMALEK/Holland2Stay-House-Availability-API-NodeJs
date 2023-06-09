@@ -9,7 +9,8 @@ import { User } from 'src/user/user.schema';
 export class CronjobService {
   constructor(
     private h2sService: Holland2stayService,
-    private notificationService: NotificationService, // private messengetService: MessengerService,
+    private notificationService: NotificationService,
+    private messengetService: MessengerService,
   ) {}
   @Cron(CronExpression.EVERY_DAY_AT_11AM)
   async cronjobFindAndNotifiyUsersIfAHouseAvailableInHollandToStay() {
@@ -33,6 +34,6 @@ export class CronjobService {
         users.push({ ...result });
       }
     }
-    // this.messengetService.sendNotificationToAllUsers(users);
+    this.messengetService.sendNotificationToAllUsers(users, '');
   }
 }
