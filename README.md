@@ -1,4 +1,7 @@
 
+# ARCHIVED AND NOT MAINTAINED ANY MORE!
+When I saw that other projects do the same thing, I decided not to move forward with this project. from now on, this project will be archived and will not be updated. if you need the same functionality you can search Git Hub for similar projects.
+
 ## Description
 This is a simple application that goes through the Holland2Stay houses and give you the number of available appartments in different cities. There is also a telegram bot that you can use to get this data. I also implemented a feature on Telegram bot that you can use to get a notification if a new house became available in Hollan2Stay.
 
